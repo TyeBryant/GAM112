@@ -28,11 +28,18 @@ public class Scr_VehicleController : MonoBehaviour {
     // Called from FixedUpdate. Handles moving the vehicle.
     void UpdateVehicleMovement()
     {
+        //TEMPORARY
+        //Sets the throttle to 1 if space is down, and 0 if it's not
+        if (Input.GetKey("space"))
+            updateThrottlePercentage(1.0f);
+        else
+            updateThrottlePercentage(0.0f);
+
         float scaledTorque = throttlePercentage * accelTorque; // Scale the tourqe based on the throttle percentage
 
-        foreach(WheelCollider wheel in Wheels)
+        foreach (WheelCollider wheel in Wheels)
         {
-            wheel.motorTorque = accelTorque;
+            wheel.motorTorque = scaledTorque;
             wheel.brakeTorque = 0;
         }
     }
