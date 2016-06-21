@@ -4,6 +4,7 @@ using System.Collections;
 public class Scr_VehicleController : MonoBehaviour {
 
     public float accelTorque = 25f; // Effectively controls the vehicle's speed
+    public float wheelSize = 4.0f; // Sets the size of the wheels
     public float maxSuspensionDistance = 5.0f; // How far down does the wheel's suspension reach
 
     public WheelCollider[] Wheels; // Array to store all the wheels
@@ -15,6 +16,7 @@ public class Scr_VehicleController : MonoBehaviour {
         foreach (WheelCollider wheel in Wheels)
         {
             wheel.suspensionDistance = maxSuspensionDistance;
+            wheel.radius = wheelSize;
         }
     }
 	
