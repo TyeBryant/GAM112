@@ -4,11 +4,23 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class Scr_VehicleController : MonoBehaviour {
 
-    public float accelTorque; // Effectively controls the vehicle's speed
-    public float wheelSize = 4.0f; // Sets the size of the wheels
-    public float maxSuspensionDistance = 5.0f; // How far down does the wheel's suspension reach
+    [SerializeField]
+    float accelTorque; // Effectively controls the vehicle's speed
 
-    public WheelCollider[] Wheels; // Array to store all the wheels
+    [SerializeField]
+    float wheelSize = 4.0f; // Sets the size of the wheels
+
+    [SerializeField]
+    float maxSuspensionDistance = 5.0f; // How far down does the wheel's suspension reach
+
+    [SerializeField]
+    WheelCollider[] Wheels; // Array to store all the wheels
+
+    [SerializeField]
+    float accelerationModifier;
+
+    [SerializeField]
+    float brakeTorque;
 
     private Rigidbody rb;
 
@@ -35,7 +47,7 @@ public class Scr_VehicleController : MonoBehaviour {
         foreach (WheelCollider wheel in Wheels)
         {
             if (accelTorque < 1)
-                wheel.brakeTorque = 20;
+                wheel.brakeTorque = brakeTorque;
             else
                 wheel.brakeTorque = 0;
 
@@ -45,6 +57,6 @@ public class Scr_VehicleController : MonoBehaviour {
 
     public void ThrottleSlider (float sliderValue)
     {
-        accelTorque = sliderValue;
+        accelTorque = sliderValue * accelerationModifier;
     }
 }
